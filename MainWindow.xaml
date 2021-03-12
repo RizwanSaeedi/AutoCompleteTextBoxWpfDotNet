@@ -6,10 +6,31 @@
         xmlns:local="clr-namespace:AutoCompleteTextBoxWpfDotNet"
         xmlns:controls='clr-namespace:System.Windows.Controls;assembly=DotNetProjects.Input.Toolkit'
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow"
+        Height="450"
+        Width="800">
+    <Window.Resources>
+        <DataTemplate x:Key="AutoCompleteBoxItemTemplate">
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Center"
+                        Background="Transparent">
+                <Label Content="{Binding name}"
+                       Background='Blue'
+                       Foreground='White' />
+            </StackPanel>
+        </DataTemplate>
+    </Window.Resources>
     <StackPanel Orientation='Vertical'>
-        <controls:AutoCompleteBox x:Name='tb'>
-            
-        </controls:AutoCompleteBox>
+        <controls:AutoCompleteBox x:Name='tb'
+                                  FontSize='25'
+                                  ValueMemberPath="name"
+                                  SelectedItem="{Binding Path=Obj.name, Mode=TwoWay}"
+                                  ItemTemplate="{StaticResource AutoCompleteBoxItemTemplate}"></controls:AutoCompleteBox>
+        <Button x:Name='btn'
+                Content='Get Selection'
+                Width='150'
+                Click='btn_Click'
+                HorizontalAlignment='Left'
+                Margin='10'></Button>
     </StackPanel>
 </Window>

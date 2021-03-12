@@ -20,11 +20,33 @@ namespace AutoCompleteTextBoxWpfDotNet
     /// </summary>
     public partial class MainWindow : Window
     {
+        class Obj
+        {
+            public int ID { get; set; }
+            public string name { get; set; }
+
+            public override string ToString()
+            {
+                return name;
+            }
+        }
         public MainWindow()
         {
             InitializeComponent();
+           
+
+            List<Obj> list = new List<Obj>();
+            list.Add(new Obj() {ID = 1, name = "Ali Raza" });
+
+            tb.ItemsSource = list;
             tb.FilterMode = AutoCompleteFilterMode.Contains;
-            tb.ItemsSource = new string[] { "Ali Raza", "Farhan Rasheed", "Rizwan Rasheed"}; 
+            //tb.ItemsSource = new string[] { "Ali Raza", "Farhan Rasheed", "Rizwan Rasheed"}; 
+        }
+
+        private void btn_Click(object sender, RoutedEventArgs e)
+        {
+             var selection = tb.SelectedItem as Obj;
+            MessageBox.Show(selection.ID+""); 
         }
     }
 }
